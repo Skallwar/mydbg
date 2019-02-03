@@ -10,11 +10,22 @@
 
 static pid_t dbg_pid = 0;
 
+int help(void *ctx, char *arg)
+{
+    for (int64_t i = 0; i < __stop_cmds - __stop_cmds; ++i) {
+        struct cmd *cmd = __stop_cmds + i;
+        printf("%s : %s\n", cmd->name, cmd->help);
+    }
+
+    return 0;
+}
+shell_cmd(help, help, Display this message);
+
 int quit(void *ctx, char *arg)
 {
     _exit(0);
 }
-shell_cmd(exit, quit);
+shell_cmd(exit, quit, Exit the debuger);
 
 int file(void *ctx, char *name)
 {
@@ -30,7 +41,7 @@ int file(void *ctx, char *name)
 
     return 0;
 }
-shell_cmd(file, file);
+shell_cmd(file, file, Open a file for debuging);
 
 int resume(void *ctx, char *arg)
 {
@@ -38,4 +49,4 @@ int resume(void *ctx, char *arg)
 
     return 0;
 }
-shell_cmd(continue, resume);
+shell_cmd(continue, resume, Resume execution);

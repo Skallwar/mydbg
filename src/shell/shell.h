@@ -3,13 +3,14 @@
 
 struct cmd {
     const char *name;
+    const char *help;
     int (*fn)(void *, char *);
 };
 
-#define shell_cmd(cmd_name, func) \
-    static struct cmd __cmd_ ## cmd_name \
+#define shell_cmd(namestr, func, helpstr) \
+    static struct cmd __cmd_ ## namestr \
     __attribute__ ((section("cmds"), used)) = \
-    {.name = #cmd_name, .fn = func}
+    {.name = #namestr, .fn = func, .help = #helpstr}
 
 extern struct cmd __start_cmds[];
 extern struct cmd __stop_cmds[];
