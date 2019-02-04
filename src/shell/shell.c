@@ -8,14 +8,15 @@
 #include <assert.h>
 
 #include "shell.h"
+#include "../cmds.h"
 
 
 static struct cmd *find_cmd(const char *buf);
-static int exec_cmd(struct cmd *cmd, char *buf);
+static int exec_cmd(struct cmd *cmd, void *ctx, char *buf);
 static char **readline_cmd_complete(const char *str, int start, int end);
 static char *readline_cmd_generator(const char *str, int);
 
-void shell_start(const char *name)
+void shell_start(const char *name, void *ctx)
 {
     assert(name);
 
@@ -34,7 +35,7 @@ void shell_start(const char *name)
 
             struct cmd *cmd = find_cmd(name);
             if (cmd) {
-                exec_cmd(cmd, arg);
+                exec_cmd(cmd, ctx, arg);
             }
 
         }
@@ -57,11 +58,11 @@ static struct cmd *find_cmd(const char *buf)
     return NULL;
 }
 
-static int exec_cmd(struct cmd *cmd, char *buf)
+static int exec_cmd(struct cmd *cmd, void *ctx, char *buf)
 {
     assert(cmd);
 
-    return cmd->fn(NULL, buf);
+    return cmd->fn(ctx, buf);
 }
 
 static char **readline_cmd_complete(const char *buf, int start, int end)
