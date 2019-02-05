@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <sys/ptrace.h>
 #include <sys/wait.h>
+#include <err.h>
 
 #include "shell/shell.h"
 #include "cmds.h"
@@ -12,6 +13,9 @@
 static ctx_t *dbg_init(char *argv[]);
 
 int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        errx(1, "No program to debug\n");
+    }
     ctx_t *ctx = dbg_init(argv);
     shell_start(NAME, ctx);
 }
