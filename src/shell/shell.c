@@ -34,10 +34,14 @@ void shell_start(const char *name, void *ctx)
             /* printf("Name : %s, Arg : %s\n", name, arg); */
 
             struct cmd *cmd = find_cmd(name);
-            if (cmd) {
-                exec_cmd(cmd, ctx, arg);
+            if (!cmd) {
+                printf("No command found\n");
             }
 
+            int ret = exec_cmd(cmd, ctx, arg);
+            if (ret < 0) {
+                printf("An error occured in the last command\n");
+            }
         }
 
         free(buf);
