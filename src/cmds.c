@@ -26,6 +26,8 @@
 /* } */
 /* shell_cmd(help, help, "Display this message"); */
 
+static void sig_catch(int sig);
+
 int quit(ctx_t *ctx, char *arg UNUSED)
 {
     kill(ctx->pid, SIGKILL);
@@ -37,9 +39,28 @@ int resume(ctx_t *ctx, char *arg UNUSED)
 {
     ptrace(PTRACE_CONT, ctx->pid, 0, 0);
 
+    int wstatus;
+    waitpid(ctx->pid, &wstatus, 0);
+
+    if (WIFEXITED(wstatus)) {
+        printf("Debugged program exited normally\n");
+    }
+    else if (WIFSTOPPED(wstatus)) {
+        int sig = WSTOPSIG(wstatus);
+        sig_catch(sig);
+    }
+
     return 0;
 }
 shell_cmd(continue, resume);
+
+static void sig_catch(int sig)
+{
+    switch (sig) {
+    default :
+        printf("A signal has been caught but no action has been implemented\n");
+    }
+}
 
 int info_regs(ctx_t *ctx, char *arg UNUSED)
 {
