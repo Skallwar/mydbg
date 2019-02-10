@@ -28,12 +28,13 @@ void shell_start(const char *name, void *ctx)
         if (buf) {
             add_history(buf);
 
-            char *name = strtok(buf, " ");
-            char *arg = strtok(NULL, " ");
+            char *arg = buf;
+            while (*arg != '\0' && *arg != ' ') {
+                ++arg;
+            }
+            *arg++ = '\0';
 
-            /* printf("Name : %s, Arg : %s\n", name, arg); */
-
-            struct cmd *cmd = find_cmd(name);
+            struct cmd *cmd = find_cmd(buf);
             if (!cmd) {
                 printf("No command found\n");
             }
