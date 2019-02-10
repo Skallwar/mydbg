@@ -14,5 +14,6 @@ add_executable(mydbg ${mydbg_src})
 
 target_link_libraries(mydbg
     shell
+    -lcapstone #Capstone
     -fsanitize=address -fno-omit-frame-pointer  #ASAN
 )
