@@ -3,13 +3,14 @@
 #include <sys/user.h>
 
 #include "cmds.h"
+#include "../regs/regs.h"
 
 #define print_reg(regs, name) printf("%s: 0x%llx\n", #name, regs.name)
 
 int info_regs(ctx_t *ctx, char *arg UNUSED)
 {
     struct user_regs_struct regs;
-    ptrace(PTRACE_GETREGS, ctx->pid, NULL, &regs);
+    regs_get(ctx->pid, &regs);
 
     print_reg(regs, rip);
     print_reg(regs, rsp);
