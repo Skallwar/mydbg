@@ -1,5 +1,3 @@
-#define _POSIX_C_SOURCE
-#include <sys/types.h>
 #include <signal.h>
 
 #include "cmds.h"
