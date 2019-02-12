@@ -6,7 +6,7 @@
 #include <err.h>
 
 #include "shell/shell.h"
-#include "cmds.h"
+#include "cmds/cmds.h"
 
 #define NAME "mydbg> "
 
