@@ -114,6 +114,7 @@ char **shell_tokenize(char *buf, size_t size)
     for (size_t i = 1; i < size; ++i) {
         char *token = strtok(NULL, " ");
         if (!token) {
+            free(args);
             return NULL;
         }
 
