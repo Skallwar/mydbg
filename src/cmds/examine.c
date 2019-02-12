@@ -6,15 +6,19 @@
 #include <string.h>
 
 #include "cmds.h"
+#include "../mem/mem.h"
+#include "../shell/shell.h"
 
 static int print_disasm(uint64_t addr, uint8_t *buf, size_t size);
-static int read_mem(pid_t pid, uint64_t *addr, uint8_t *buf, size_t size);
 
 int examine(ctx_t *ctx, char *arg)
 {
-    char *format = strtok(arg, " ");
-    char *size_str= strtok(NULL, " ");
-    char *addr_str = strtok(NULL, " ");
+    char **args = shell_tokenize(arg, 3);
+    char *format = args[0];
+    char *size_str = args[1];
+    char *addr_str = args[2];
+    free(args);
+
     if (!arg && !size_str && !addr_str) {
         printf("Examine needs there earguments\n");
         return -1;
@@ -38,19 +42,6 @@ int examine(ctx_t *ctx, char *arg)
     return 0;
 }
 shell_cmd(examine, examine);
-
-static int read_mem(pid_t pid, uint64_t *addr, uint8_t *buf, size_t size)
-{
-    struct iovec local[1] = {{buf, size}};
-    struct iovec remote[1] = {{addr, size}};
-    ssize_t nread = process_vm_readv(pid, local, 1, remote, 1, 0);
-
-    if (nread != size) {
-        return -1;
-    }
-
-    return 0;
-}
 
 static int print_disasm(uint64_t addr, uint8_t *buf, size_t size)
 {

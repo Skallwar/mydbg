@@ -10,6 +10,7 @@ file(GLOB mydbg_src
         src/cmds/*.c
         src/regs/*.c
         src/sig/*.c
+        src/mem/*.c
 )
 
 add_executable(mydbg ${mydbg_src})
