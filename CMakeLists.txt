@@ -6,8 +6,10 @@ add_compile_options(-g -Wall -Wextra)
 add_subdirectory(src)
 
 file(GLOB mydbg_src
-        src/*.h
         src/*.c
+        src/cmds/*.c
+        src/regs/*.c
+        src/sig/*.c
 )
 
 add_executable(mydbg ${mydbg_src})
