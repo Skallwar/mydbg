@@ -49,6 +49,18 @@ void shell_start(const char *name, void *ctx)
     }
 }
 
+char **shell_tokenize(char *buf, size_t size)
+{
+    char **args = malloc(size * sizeof(*args));
+
+    args[0] = strtok(buf, " ");
+    for (size_t i = 1; i < size; ++i) {
+        args[i] = strtok(NULL, " ");
+    }
+
+    return args;
+}
+
 static struct cmd *find_cmd(const char *buf)
 {
     assert(buf);
