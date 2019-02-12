@@ -15,6 +15,8 @@ struct cmd {
     int (*fn)(ctx_t *, char *);
 };
 
+#define UNUSED __attribute__((unused))
+
 #define shell_cmd(namestr, func) \
     static struct cmd __cmd_ ## namestr \
     __attribute__ ((section("cmds"), used)) = \

@@ -8,7 +8,7 @@
 #include <assert.h>
 
 #include "shell.h"
-#include "../cmds.h"
+#include "../cmds/cmds.h"
 
 
 static struct cmd *find_cmd(const char *buf);
