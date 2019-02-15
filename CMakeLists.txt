@@ -3,6 +3,7 @@ project(MyDBG)
 
 add_compile_options(-g -Wall -Wextra)
 
+include_directories(src/)
 add_subdirectory(src)
 
 file(GLOB mydbg_src
@@ -17,6 +18,7 @@ add_executable(mydbg ${mydbg_src})
 
 target_link_libraries(mydbg
     shell
+    htab
     -lcapstone #Capstone
     -fsanitize=address -fno-omit-frame-pointer  #ASAN
 )
