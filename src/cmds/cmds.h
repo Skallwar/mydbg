@@ -2,9 +2,11 @@
 #define CMDS_H
 
 #include <unistd.h>
+#include "htab/htab.h"
 
 struct dbg_ctx {
     pid_t pid;
+    htab_t brktab;
 };
 
 typedef struct dbg_ctx ctx_t;

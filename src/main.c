@@ -7,6 +7,7 @@
 
 #include "shell/shell.h"
 #include "cmds/cmds.h"
+#include "htab/htab.h"
 
 #define NAME "mydbg> "
 
@@ -28,6 +29,7 @@ static ctx_t *dbg_init(char *argv[])
     }
 
     ctx->pid = fork();
+    /* ctx->brktab = htab_new(); */
 
     if (ctx->pid == 0) {
         ptrace(PTRACE_TRACEME, 0, 0, 0);
