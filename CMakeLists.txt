@@ -9,9 +9,9 @@ add_subdirectory(src)
 file(GLOB mydbg_src
         src/*.c
         src/cmds/*.c
-        src/regs/*.c
-        src/sig/*.c
-        src/mem/*.c
+        src/register/*.c
+        src/signal/*.c
+        src/memory/*.c
 )
 
 add_executable(mydbg ${mydbg_src})

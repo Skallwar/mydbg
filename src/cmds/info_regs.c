@@ -3,7 +3,7 @@
 #include <sys/user.h>
 
 #include "cmds.h"
-#include "../regs/regs.h"
+#include "register/regs.h"
 
 #define print_reg(regs, name) printf("%s: 0x%llx\n", #name, regs.name)
 

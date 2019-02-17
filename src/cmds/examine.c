@@ -6,8 +6,8 @@
 #include <string.h>
 
 #include "cmds.h"
-#include "../mem/mem.h"
-#include "../shell/shell.h"
+#include "memory/mem.h"
+#include "shell/shell.h"
 
 static int print_disasm(uint64_t addr, uint8_t *buf, size_t size);
 static void print_hex(uint8_t *buf, char *addr, size_t size);

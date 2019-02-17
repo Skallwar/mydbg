@@ -3,7 +3,7 @@
 #include <sys/types.h>
 
 #include "cmds.h"
-#include "sig/sig.h"
+#include "signal/sig.h"
 
 int resume(ctx_t *ctx, char *arg UNUSED)
 {
