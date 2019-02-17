@@ -1,10 +1,11 @@
 #include <signal.h>
 
 #include "cmds.h"
+#include "shell/shell.h"
 
 int quit(ctx_t *ctx, char *arg UNUSED)
 {
     kill(ctx->pid, SIGKILL);
-    _exit(0);
+    shell_stop();
 }
 shell_cmd(exit, quit);
