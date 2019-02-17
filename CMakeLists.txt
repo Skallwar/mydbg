@@ -12,6 +12,7 @@ file(GLOB mydbg_src
         src/register/*.c
         src/signal/*.c
         src/memory/*.c
+        src/execution/*.c
 )
 
 add_executable(mydbg ${mydbg_src})
