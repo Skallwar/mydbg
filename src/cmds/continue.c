@@ -3,7 +3,7 @@
 #include <sys/types.h>
 
 #include "cmds.h"
-#include "../sig/sig.h"
+#include "sig/sig.h"
 
 int resume(ctx_t *ctx, char *arg UNUSED)
 {
@@ -19,3 +19,4 @@ int resume(ctx_t *ctx, char *arg UNUSED)
 
     return 0;
 }
+shell_cmd(continue, resume);
