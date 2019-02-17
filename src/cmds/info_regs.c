@@ -5,8 +5,6 @@
 #include "cmds.h"
 #include "register/regs.h"
 
-#define print_reg(regs, name) printf("%s: 0x%llx\n", #name, regs.name)
-
 int info_regs(ctx_t *ctx, char *arg UNUSED)
 {
     struct user_regs_struct regs;
