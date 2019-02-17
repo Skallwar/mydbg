@@ -23,7 +23,8 @@ extern struct cmd __stop_cmds[];
 
 int help(ctx_t *ctx, char *arg);
 int quit(ctx_t *ctx, char *arg);
-int resume(ctx_t *ctx, char *arg);
+int continue_cmd(ctx_t *ctx, char *arg);
+int singlestep_cmd(ctx_t *ctx, char *arg);
 int info_regs(ctx_t *ctx, char *arg);
 int info_mem(ctx_t *ctx, char *arg);
 
