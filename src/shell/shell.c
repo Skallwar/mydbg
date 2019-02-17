@@ -8,13 +8,14 @@
 #include <assert.h>
 
 #include "shell.h"
-#include "../cmds/cmds.h"
-
+#include "cmds/cmds.h"
 
 static struct cmd *find_cmd(const char *buf);
 static int exec_cmd(struct cmd *cmd, void *ctx, char *buf);
 static char **readline_cmd_complete(const char *str, int start, int end);
 static char *readline_cmd_generator(const char *str, int);
+
+static shell_status = true;
 
 void shell_start(const char *name, void *ctx)
 {
@@ -22,7 +23,7 @@ void shell_start(const char *name, void *ctx)
 
     rl_attempted_completion_function = readline_cmd_complete;
 
-    while (1) {
+    while (shell_status) {
         char *buf = readline(name);
 
         if (buf) {
@@ -38,15 +39,21 @@ void shell_start(const char *name, void *ctx)
             if (!cmd) {
                 printf("No command found\n");
             }
-
-            int ret = exec_cmd(cmd, ctx, arg);
-            if (ret < 0) {
-                printf("An error occured in the last command\n");
+            else {
+                int ret = exec_cmd(cmd, ctx, arg);
+                if (ret < 0) {
+                    printf("An error occured in the last command\n");
+                }
             }
         }
 
         free(buf);
     }
+}
+
+void shell_stop()
+{
+    shell_status = false;
 }
 
 static struct cmd *find_cmd(const char *buf)
