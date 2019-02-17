@@ -30,5 +30,6 @@ int sig_handler(int sig)
         }
     }
 
+    printf("A signal has been caught but no action has been implemented\n");
     return -1;
 }
