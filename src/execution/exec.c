@@ -9,8 +9,15 @@ int resume(ctx_t *ctx)
 {
     ptrace(PTRACE_CONT, ctx->pid, 0, 0);
 
+    int err = 0;
+    if (ctx->onbrk) {
+        err = singlestep(ctx);
+    }
+
     int sig = sig_catch(ctx->pid);
-    int err = sig_handler(sig);
+    int err2 = sig_handler(ctx, sig);
+
+    err = err < 0 ? err : err2;
 
     /* Return error status of sig_handler() */
     return err;
@@ -21,12 +28,7 @@ int singlestep(ctx_t *ctx)
     ptrace(PTRACE_SINGLESTEP, ctx->pid, 0, 0);
 
     int sig = sig_catch(ctx->pid);
-
-    int err = 0;
-    // TODO Fix sig_handler
-    /* if (sig != SIGTRAP) { */
-    /*    err = sig_handler(sig); */
-    /* } */
+    int err = sig_handler(ctx, sig);
 
     return err;
 }
