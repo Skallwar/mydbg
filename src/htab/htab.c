@@ -87,7 +87,7 @@ void *htab_del(htab_t *htab, void *key)
         return NULL;
     }
 
-    size_t index = htab->hfunc(key);
+    size_t index = htab->hfunc(key) % htab->cap;
     struct bucket *head = head_buck(htab, index);
 
     intrlist_remove(&buck->list);
@@ -139,7 +139,7 @@ static void htab_extend(htab_t *htab)
 
 static struct bucket *find_buck(htab_t *htab, void *key)
 {
-    size_t index = htab->hfunc(key) % htab->size;
+    size_t index = htab->hfunc(key) % htab->cap;
     struct bucket *head = head_buck(htab, index);
 
     struct bucket *buck;
