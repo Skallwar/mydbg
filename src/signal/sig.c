@@ -57,19 +57,20 @@ static void sig_trap(ctx_t *ctx)
 
     struct user_regs_struct regs;
     regs_get(ctx->pid, &regs);
-    int rip = reg_get(&regs, rip);
+    /* We need to jump before SIGTRAP */
+    uint64_t *rip = (uint64_t *)(reg_get(&regs, rip) - 1);
 
-    brkp_t *brkp = htab_find(ctx->brktab, &rip);
+    brkp_t *brkp = htab_find(ctx->brktab, rip);
 
     if (brkp) {
         printf("Whe succefully hit a breakpoint !\n");
-        brkp_unset(ctx, brkp);
+        /* brkp_unset(ctx, brkp); */
 
-        /* Set rip to the breakpoint itself */
-        reg_set(&regs, rip, --rip);
-        regs_set(ctx->pid, &regs);
+        /* /1* Set rip to the breakpoint itself *1/ */
+        /* reg_set(&regs, rip, (uint64_t)rip); */
+        /* regs_set(ctx->pid, &regs); */
 
-        ctx->onbrk = true;
-        last_brkp = brkp;
+        /* ctx->onbrk = true; */
+        /* last_brkp = brkp; */
     }
 }
