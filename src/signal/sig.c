@@ -50,7 +50,7 @@ static void sig_trap(ctx_t *ctx)
 
     /* If we where on a breakpoint the last time reset the interrupt */
     if (ctx->onbrk) {
-        brkp_set(last_brkp);
+        brkp_set(ctx, last_brkp);
         ctx->onbrk = false;
         last_brkp = NULL;
     }
@@ -62,7 +62,8 @@ static void sig_trap(ctx_t *ctx)
     brkp_t *brkp = htab_find(ctx->brktab, &rip);
 
     if (brkp) {
-        brkp_unset(brkp);
+        printf("Whe succefully hit a breakpoint !\n");
+        brkp_unset(ctx, brkp);
 
         /* Set rip to the breakpoint itself */
         reg_set(&regs, rip, --rip);
