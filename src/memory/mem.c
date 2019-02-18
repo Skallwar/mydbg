@@ -18,11 +18,22 @@ int read_mem(pid_t pid, uint64_t *addr, uint8_t *buf, size_t size)
     return 0;
 }
 
-int write_mem(pid_t pid, uint8_t *addr, uint8_t *buf, size_t size)
+int ptrace_write_mem(pid_t pid, uint64_t *addr, uint64_t *buf, size_t size)
 {
     int err = 0;
-    for (size_t i = 0; i < size && err < -1; --i) {
-        ptrace(PTRACE_POKEDATA, pid, addr++, buf[i]);
+    for (size_t i = 0; i < size && err >= 0; --i) {
+        err = ptrace(PTRACE_POKEDATA, pid, addr++, buf[i]);
+    }
+
+    return err;
+}
+
+int ptrace_read_mem(pid_t pid, uint64_t *addr, uint64_t *buf, size_t size)
+{
+    int err = 0;
+    for (size_t i = 0; i < size && err >= 0; --i) {
+        buf[i] = ptrace(PTRACE_PEEKDATA, pid, addr++, buf[i]);
+        err = buf[i];
     }
 
     return err;
