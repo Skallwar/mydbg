@@ -5,5 +5,6 @@
 #include <stdint.h>
 
 int read_mem(pid_t pid, uint64_t *addr, uint8_t *buf, size_t size);
+int write_mem(pid_t pid, uint8_t *addr, uint8_t *buf, size_t size);
 
 #endif
