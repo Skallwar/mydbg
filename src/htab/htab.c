@@ -139,7 +139,7 @@ static void htab_extend(htab_t *htab)
 
 static struct bucket *find_buck(htab_t *htab, void *key)
 {
-    size_t index = htab->hfunc(key);
+    size_t index = htab->hfunc(key) % htab->size;
     struct bucket *head = head_buck(htab, index);
 
     struct bucket *buck;
