@@ -8,7 +8,7 @@
 #include "sig.h"
 #include "dbg.h"
 #include "register/regs.h"
-#include "breakpoint/brk.h"
+#include "breakpoint/brkp.h"
 
 static void sig_trap(ctx_t *ctx);
 

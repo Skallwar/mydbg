@@ -3,7 +3,7 @@
 
 #include "cmds.h"
 #include "shell/shell.h"
-#include "breakpoint/brk.h"
+#include "breakpoint/brkp.h"
 
 int break_cmd (ctx_t *ctx, char *arg)
 {
