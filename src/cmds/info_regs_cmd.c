@@ -5,7 +5,7 @@
 #include "cmds.h"
 #include "register/regs.h"
 
-int info_regs(ctx_t *ctx, char *arg UNUSED)
+int info_regs_cmd(ctx_t *ctx, char *arg UNUSED)
 {
     struct user_regs_struct regs;
     regs_get(ctx->pid, &regs);
@@ -40,4 +40,4 @@ int info_regs(ctx_t *ctx, char *arg UNUSED)
 
     return 0;
 }
-shell_cmd(info_regs, info_regs);
+shell_cmd(info_regs, info_regs_cmd);

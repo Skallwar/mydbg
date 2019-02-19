@@ -21,12 +21,18 @@ struct cmd {
 extern struct cmd __start_cmds[];
 extern struct cmd __stop_cmds[];
 
-int help(ctx_t *ctx, char *arg);
-int quit(ctx_t *ctx, char *arg);
+int help_cmd(ctx_t *ctx, char *arg);
+
+int exit_cmd(ctx_t *ctx, char *arg);
+
 int continue_cmd(ctx_t *ctx, char *arg);
-int singlestep_cmd(ctx_t *ctx, char *arg);
-int info_regs(ctx_t *ctx, char *arg);
-int info_mem(ctx_t *ctx, char *arg);
-int brkp_cmd (ctx_t *ctx, char *arg);
+int next_cmd(ctx_t *ctx, char *arg);
+
+int info_regs_cmd(ctx_t *ctx, char *arg);
+int info_mem_cmd(ctx_t *ctx, char *arg);
+
+int examine_cmd(ctx_t *ctx, char *arg);
+
+int break_cmd(ctx_t *ctx, char *arg);
 
 #endif

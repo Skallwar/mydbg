@@ -4,14 +4,14 @@
 
 static int print_file(char *path);
 
-int info_mem(ctx_t *ctx, char *arg UNUSED)
+int info_mem_cmd(ctx_t *ctx, char *arg UNUSED)
 {
     char path[64];
     sprintf(path, "/proc/%i/maps", ctx->pid);
 
     return print_file(path);
 }
-shell_cmd(info_mem, info_mem);
+shell_cmd(info_mem, info_mem_cmd);
 
 static int print_file(char *path)
 {

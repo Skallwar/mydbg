@@ -12,7 +12,7 @@
 static int print_disasm(uint64_t addr, uint8_t *buf, size_t size);
 static void print_hex(uint8_t *buf, char *addr, size_t size);
 
-int examine(ctx_t *ctx, char *arg)
+int examine_cmd(ctx_t *ctx, char *arg)
 {
     /* Get token and parse them */
     char **args = shell_tokenize(arg, 3);
@@ -47,7 +47,7 @@ int examine(ctx_t *ctx, char *arg)
 
     return 0;
 }
-shell_cmd(examine, examine);
+shell_cmd(examine, examine_cmd);
 
 static void print_hex(uint8_t *buf, char *addr, size_t size)
 {
