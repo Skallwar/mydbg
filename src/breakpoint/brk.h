@@ -20,7 +20,5 @@ brkp_t *brkp_new(ctx_t *ctx, uint64_t *addr);
 int brkp_set(ctx_t *ctx, brkp_t *brkp);
 /* Replace interupt by real code of brkp in the memory of the tracee */
 int brkp_unset(ctx_t *ctx, brkp_t *brkp);
-/* Remove a breakpoint in a htab */
-/* void brkp_set(htab_t *htab); */
 
 #endif
