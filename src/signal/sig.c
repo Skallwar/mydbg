@@ -63,7 +63,7 @@ static void sig_trap(ctx_t *ctx)
     brkp_t *brkp = htab_find(ctx->brktab, rip);
 
     if (brkp) {
-        printf("Whe succefully hit a breakpoint !\n");
+        printf("Breakpoint %lu at addres %p\n", brkp->id, rip);
         brkp_unset(ctx, brkp);
 
         /* Reset rip in the memory of the tracee */
