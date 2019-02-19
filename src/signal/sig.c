@@ -64,13 +64,13 @@ static void sig_trap(ctx_t *ctx)
 
     if (brkp) {
         printf("Whe succefully hit a breakpoint !\n");
-        /* brkp_unset(ctx, brkp); */
+        brkp_unset(ctx, brkp);
 
-        /* /1* Set rip to the breakpoint itself *1/ */
-        /* reg_set(&regs, rip, (uint64_t)rip); */
-        /* regs_set(ctx->pid, &regs); */
+        /* Reset rip in the memory of the tracee */
+        reg_set(&regs, rip, (uint64_t)rip);
+        regs_set(ctx->pid, &regs);
 
-        /* ctx->onbrk = true; */
-        /* last_brkp = brkp; */
+        ctx->onbrk = true;
+        last_brkp = brkp;
     }
 }

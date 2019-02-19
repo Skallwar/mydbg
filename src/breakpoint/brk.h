@@ -8,7 +8,7 @@
 struct brkp {
     size_t id;
     uint64_t *addr;
-    uint8_t byte;
+    uint64_t instr;
 };
 
 typedef struct brkp brkp_t;
