@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.0)
 project(MyDBG)
 
-add_compile_options(-g -Wall -Wextra)
+add_compile_options(-g -Wall -Wextra -std=c99)
 
 include_directories(src/)
 add_subdirectory(src)

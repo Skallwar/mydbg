@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <string.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -15,7 +16,7 @@ static int exec_cmd(struct cmd *cmd, void *ctx, char *buf);
 static char **readline_cmd_complete(const char *str, int start, int end);
 static char *readline_cmd_generator(const char *str, int);
 
-static shell_status = true;
+static bool shell_status = true;
 
 void shell_start(const char *name, void *ctx)
 {
@@ -77,7 +78,9 @@ static int exec_cmd(struct cmd *cmd, void *ctx, char *buf)
     return cmd->fn(ctx, buf);
 }
 
-static char **readline_cmd_complete(const char *buf, int start, int end)
+static char **readline_cmd_complete(const char *buf,
+                                    int start UNUSED,
+                                    int end UNUSED)
 {
     rl_attempted_completion_over = 1;
 

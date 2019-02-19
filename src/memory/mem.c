@@ -11,7 +11,7 @@ int read_mem(pid_t pid, uint64_t *addr, uint8_t *buf, size_t size)
     struct iovec remote[1] = {{addr, size}};
     ssize_t nread = process_vm_readv(pid, local, 1, remote, 1, 0);
 
-    if (nread != size) {
+    if (nread < -1 || (size_t)nread != size) {
         return -1;
     }
 

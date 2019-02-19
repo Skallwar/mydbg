@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 1
 #include <signal.h>
 
 #include "cmds.h"
@@ -5,7 +6,8 @@
 
 int quit(ctx_t *ctx, char *arg UNUSED)
 {
-    kill(ctx->pid, SIGKILL);
     shell_stop();
+
+    return kill(ctx->pid, SIGKILL);
 }
 shell_cmd(exit, quit);

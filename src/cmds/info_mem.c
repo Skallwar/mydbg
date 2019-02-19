@@ -4,7 +4,7 @@
 
 static int print_file(char *path);
 
-int info_mem(ctx_t *ctx, char *arg)
+int info_mem(ctx_t *ctx, char *arg UNUSED)
 {
     char path[64];
     sprintf(path, "/proc/%i/maps", ctx->pid);
