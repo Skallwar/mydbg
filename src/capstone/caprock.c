@@ -40,15 +40,14 @@ cs_insn *next_instr(ctx_t *ctx, uint64_t addr)
 	if (cs_open(CS_ARCH_X86, CS_MODE_64, &handle) != CS_ERR_OK)
 		return NULL;
 
-    for (int size = 0, count = -1; count != 2; ++size) {
+    for (int size = 0, count = -1; count != 1; ++size) {
         uint8_t buf[size];
         read_mem(ctx->pid, (uint64_t *)addr, buf, size);
 
         count = cs_disasm(handle, buf, size, addr, 0, &insn);
     }
 
-    cs_free(insn, 1);
     cs_close(&handle);
 
-    return insn + 1;
+    return insn;
 }
