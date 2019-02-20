@@ -5,13 +5,13 @@
 #include "exec.h"
 #include "signal/sig.h"
 
-int resume(ctx_t *ctx)
+int exec_resume(ctx_t *ctx)
 {
     ptrace(PTRACE_CONT, ctx->pid, 0, 0);
 
     int err = 0;
     if (ctx->onbrk) {
-        err = singlestep(ctx);
+        err = exec_singlestep(ctx);
     }
 
     int sig = sig_catch(ctx->pid);
@@ -23,7 +23,7 @@ int resume(ctx_t *ctx)
     return err;
 }
 
-int singlestep(ctx_t *ctx)
+int exec_singlestep(ctx_t *ctx)
 {
     ptrace(PTRACE_SINGLESTEP, ctx->pid, 0, 0);
 

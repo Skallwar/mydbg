@@ -3,6 +3,6 @@
 
 int next_cmd(ctx_t *ctx, char *arg UNUSED)
 {
-    return singlestep(ctx);
+    return exec_singlestep(ctx);
 }
 shell_cmd(next, next_cmd);

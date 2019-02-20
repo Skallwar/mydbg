@@ -7,6 +7,6 @@
 
 int continue_cmd(ctx_t *ctx, char *arg UNUSED)
 {
-    return resume(ctx);
+    return exec_resume(ctx);
 }
 shell_cmd(continue, continue_cmd);
