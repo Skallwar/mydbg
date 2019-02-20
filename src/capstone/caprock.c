@@ -32,16 +32,15 @@ int print_disasm(uint64_t addr, uint8_t *buf, size_t size)
     return 0;
 }
 
-int instr_size(ctx_t *ctx, uint64_t addr)
+cs_insn *next_instr(ctx_t *ctx, uint64_t addr)
 {
     csh handle;
 	cs_insn *insn;
 
 	if (cs_open(CS_ARCH_X86, CS_MODE_64, &handle) != CS_ERR_OK)
-		return -1;
+		return NULL;
 
-    size_t size = 0;
-    for (int count = -1; count != 1; ++size) {
+    for (int size = 0, count = -1; count != 2; ++size) {
         uint8_t buf[size];
         read_mem(ctx->pid, (uint64_t *)addr, buf, size);
 
@@ -51,5 +50,5 @@ int instr_size(ctx_t *ctx, uint64_t addr)
     cs_free(insn, 1);
     cs_close(&handle);
 
-    return size;
+    return insn + 1;
 }
