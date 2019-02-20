@@ -27,6 +27,7 @@ int exit_cmd(ctx_t *ctx, char *arg);
 
 int continue_cmd(ctx_t *ctx, char *arg);
 int next_cmd(ctx_t *ctx, char *arg);
+int next_instr_cmd(ctx_t *ctx, char *arg);
 
 int info_regs_cmd(ctx_t *ctx, char *arg);
 int info_mem_cmd(ctx_t *ctx, char *arg);
