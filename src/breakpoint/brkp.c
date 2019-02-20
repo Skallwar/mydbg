@@ -25,7 +25,7 @@ brkp_t *brkp_new(ctx_t *ctx, uint64_t *addr, bool temp)
 
     /* Read the byte */
     int err = read_instr(ctx->pid, brkp->addr, &brkp->instr);
-    if (err < 0) {
+    if (err == -1) {
         return NULL;
     }
 
