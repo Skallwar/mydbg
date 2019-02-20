@@ -9,9 +9,10 @@ add_subdirectory(src)
 file(GLOB mydbg_src
         src/*.c
         src/cmds/*.c
-        src/register/*.c
         src/signal/*.c
         src/memory/*.c
+        src/register/*.c
+        src/capstone/*.c
         src/execution/*.c
         src/breakpoint/*.c
 )
