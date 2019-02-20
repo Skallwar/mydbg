@@ -25,7 +25,7 @@ int ptrace_write_mem(pid_t pid, uint64_t *addr, uint64_t *buf, size_t size)
         err = ptrace(PTRACE_POKEDATA, pid, addr++, buf[i]);
     }
 
-    return err;
+    return err == -1 ? -1 : 0;
 }
 
 int ptrace_read_mem(pid_t pid, uint64_t *addr, uint64_t *buf, size_t size)
@@ -36,5 +36,5 @@ int ptrace_read_mem(pid_t pid, uint64_t *addr, uint64_t *buf, size_t size)
         err = buf[i];
     }
 
-    return err;
+    return err == -1 ? -1 : 0;
 }
