@@ -7,6 +7,7 @@
 
 struct brkp {
     size_t id;
+    bool temp;
     uint64_t *addr;
     uint64_t instr;
 };
@@ -14,7 +15,7 @@ struct brkp {
 typedef struct brkp brkp_t;
 
 /* Create a new struct representing a breakpoint and add it to the brkptable*/
-brkp_t *brkp_new(ctx_t *ctx, uint64_t *addr);
+brkp_t *brkp_new(ctx_t *ctx, uint64_t *addr, bool temp);
 
 /* Set the brkp in the memory of the tracee */
 int brkp_set(ctx_t *ctx, brkp_t *brkp);

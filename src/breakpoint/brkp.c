@@ -11,7 +11,7 @@ static uint64_t read_instr(pid_t pid, uint64_t *addr, uint64_t *instr);
 static uint64_t write_instr(pid_t pid, uint64_t *addr, uint64_t *instr);
 static inline uint64_t instr_mod(uint64_t base, uint8_t fbyte);
 
-brkp_t *brkp_new(ctx_t *ctx, uint64_t *addr)
+brkp_t *brkp_new(ctx_t *ctx, uint64_t *addr, bool temp)
 {
     brkp_t *brkp = malloc(sizeof(*brkp));
     if (!brkp) {
@@ -21,6 +21,7 @@ brkp_t *brkp_new(ctx_t *ctx, uint64_t *addr)
 
     brkp->id = ctx->brktab->nb_elm;
     brkp->addr = addr;
+    brkp->temp = temp;
 
     /* Read the byte */
     int err = read_instr(ctx->pid, brkp->addr, &brkp->instr);

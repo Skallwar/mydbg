@@ -50,7 +50,11 @@ static void sig_trap(ctx_t *ctx)
 
     /* If we where on a breakpoint the last time reset the interrupt */
     if (ctx->onbrk) {
-        brkp_set(ctx, last_brkp);
+        /* Set again the breakpoin only if not tbreakpoint */
+        if (!last_brkp->temp) {
+            brkp_set(ctx, last_brkp);
+        }
+
         ctx->onbrk = false;
         last_brkp = NULL;
     }

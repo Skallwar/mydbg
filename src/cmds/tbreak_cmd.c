@@ -5,7 +5,7 @@
 #include "shell/shell.h"
 #include "breakpoint/brkp.h"
 
-int break_cmd (ctx_t *ctx, char *arg)
+int tbreak_cmd (ctx_t *ctx, char *arg)
 {
     char **args = shell_tokenize(arg, 1);
     if (!args) {
@@ -18,9 +18,9 @@ int break_cmd (ctx_t *ctx, char *arg)
 
     free(args);
 
-    brkp_t *brkp = brkp_new(ctx, addr);
+    brkp_t *brkp = brkp_new(ctx, addr, true);
     int err = brkp_set(ctx, brkp);
 
     return err;
 }
-shell_cmd(break, break_cmd);
+shell_cmd(tbreak, tbreak_cmd);
