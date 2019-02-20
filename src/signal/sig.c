@@ -54,6 +54,9 @@ static void sig_trap(ctx_t *ctx)
         if (!last_brkp->temp) {
             brkp_set(ctx, last_brkp);
         }
+        else {
+            htab_del(ctx->brktab, last_brkp->addr);
+        }
 
         ctx->onbrk = false;
         last_brkp = NULL;
