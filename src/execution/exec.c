@@ -7,19 +7,18 @@
 
 int exec_resume(ctx_t *ctx)
 {
-    ptrace(PTRACE_CONT, ctx->pid, 0, 0);
-
-    int err = 0;
     if (ctx->onbrk) {
-        err = exec_singlestep(ctx);
+        int err = exec_singlestep(ctx);
+        if (err < 0) {
+            return -1;
+        }
     }
 
+    ptrace(PTRACE_CONT, ctx->pid, 0, 0);
+
     int sig = sig_catch(ctx->pid);
-    int err2 = sig_handler(ctx, sig);
+    int err = sig_handler(ctx, sig);
 
-    err = err < 0 ? err : err2;
-
-    /* Return error status of sig_handler() */
     return err;
 }
 
