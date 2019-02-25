@@ -6,6 +6,8 @@
 #include <err.h>
 
 #include "shell/shell.h"
+#include "elflib/elflib.h"
+#include "symbol/sym.h"
 #include "cmds/cmds.h"
 #include "dbg.h"
 
@@ -13,14 +15,19 @@
 
 static pid_t dbg_init(char *argv[]);
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     if (argc < 2) {
         errx(1, "No program to debug\n");
     }
 
+    elf_t *elf = elf_load(argv[1]);
+
     pid_t traceepid = dbg_init(argv);
 
     ctx_t *ctx = ctx_new(traceepid);
+
+    symbols_load(ctx, elf);
 
     shell_start(NAME, ctx);
 }

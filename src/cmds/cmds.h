@@ -36,5 +36,6 @@ int examine_cmd(ctx_t *ctx, char *arg);
 
 int break_cmd(ctx_t *ctx, char *arg);
 int tbreak_cmd (ctx_t *ctx, char *arg);
+int breakf_cmd (ctx_t *ctx, char *arg);
 
 #endif

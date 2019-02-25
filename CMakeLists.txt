@@ -11,6 +11,7 @@ file(GLOB mydbg_src
         src/cmds/*.c
         src/signal/*.c
         src/memory/*.c
+        src/symbol/*.c
         src/register/*.c
         src/capstone/*.c
         src/execution/*.c
@@ -22,6 +23,7 @@ add_executable(mydbg ${mydbg_src})
 target_link_libraries(mydbg
     shell
     htab
+    elflib
     -lcapstone #Capstone
     -fsanitize=address -fno-omit-frame-pointer  #ASAN
 )

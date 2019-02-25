@@ -10,6 +10,7 @@ struct dbg_ctx {
     pid_t pid;
     bool onbrk;
     htab_t *brktab;
+    htab_t *symtab;
 };
 
 typedef struct dbg_ctx ctx_t;
