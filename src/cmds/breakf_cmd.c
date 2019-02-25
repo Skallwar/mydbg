@@ -19,7 +19,6 @@ int breakf_cmd (ctx_t *ctx, char *arg)
 
     char *sym_name = args[0];
     uint64_t *addr = htab_find(ctx->symtab, sym_name);
-    printf("%p\n", addr);
 
     if (!addr) {
         printf("Symbol not found\n");
